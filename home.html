@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #reviews {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+            text-align: left;
+            height: 200px;
+            overflow-y: scroll;
+        }
+
+        #reviews p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        #user-review {
+            padding: 10px;
+            background-color: #222;
+            border: none;
+            border-bottom: 1px solid #555;
+            color: #fff;
+            width: 100%;
+        }
+
+        #submit-button {
+            padding: 10px 20px;
+            background-color: #0074D9;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Reviews</h1>
+        <div id="reviews">
+            <p>Excellent product! I'm very satisfied with my purchase.</p>
+            <p>Great customer service. They were very helpful.</p>
+            <!-- <p><script>alert("hello World"); </script></p> -->
+        </div>
+        <input type="text" id="user-review" placeholder="Write a review...">
+        <button id="submit-button">Submit</button>
+    </div>
+
+    <script>
+
+        // JavaScript for adding reviews
+        const reviewInput = document.getElementById('user-review');
+        const reviewsContainer = document.getElementById('reviews');
+        const submitButton = document.getElementById('submit-button');
+
+        submitButton.addEventListener('click', async () => {
+            const reviewText = reviewInput.value.trim();
+            if (reviewText !== '') {
+
+                const reviewParagraph = document.createElement('p');
+                reviewParagraph.innerHTML = reviewText;
+                reviewsContainer.appendChild(reviewParagraph);
+                reviewInput.value = '';
+            }
+        });
+    
+    
+    </script>
+</body>
+</html>

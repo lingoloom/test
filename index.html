@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            display: none;
+        }
+
+        .popup {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ff6347;
+            font-size: 24px;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 0;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+       
+    </div>
+
+    <script>
+        
+        const ipAddress = async ()=>{
+
+             const response = await fetch("https://api.ipify.org/?format=json", {
+                method:"GET"
+                })
+
+                const data = await response.json()
+                console.log(data)
+
+               return data.ip
+
+        }
+
+       const getLocation = async ()=>{
+
+        const ip = await ipAddress()
+
+         const response = await fetch(`https://api.iplocation.net/?cmd=proxy-check&key=WiZpflF7Hnu7GpuH4bOcI44sOpjg/2ToPux8Btr6Yqw=&ip=${ip}`, {
+            method:"GET"
+            })
+
+            const data = await response.json()
+            if(data.country_name !== "Nigeria"){
+
+                if(data.result === "1"){
+
+                const overlay = document.getElementById('overlay');
+                const popup = document.getElementById('popup');
+                const country = data.country_name;
+                overlay.style.display = 'block';
+                popup.innerHTML = `
+                     <h1>Access Denied</h1>
+                     <p>It appears you are using a proxy.</p>
+                 `;
+
+                    return
+                }
+
+                location.href = "/home.html"
+            }else{
+
+                document.getElementById("popup").innerHTML = `
+                 <h1>Access Denied</h1>
+                <p>We're sorry, but you are not permitted to view this page from your country.</p>
+                <h3 id="country">${data.country_name}</h3>
+                <p id="ip_message">Your Ip Address <b>${ip}</b>, is being Logged for Security Reasons</p>
+                `
+            }
+            console.log(data)
+
+
+
+       }
+
+       
+        
+      getLocation()
+
+        // Display the user's country and show the overlay and popup if on a proxy.
+        // if (userCountry) {
+        //     if (isProxy) {
+        //         const overlay = document.getElementById('overlay');
+        //         const popup = document.getElementById('popup');
+        //         const country = userCountry;
+
+        //         // Show the overlay and popup
+        //         overlay.style.display = 'block';
+
+        //         // Display the user's country
+        //         popup.innerHTML = `
+        //             <h1>Access Denied</h1>
+        //             <p>We're sorry, but you are not permitted to view this page from ${country}.</p>
+        //             <p>It appears you are using a proxy.</p>
+        //         `;
+        //     }
+        // }
+   
+   
+   
+   </script>
+</body>
+</html>
