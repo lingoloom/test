@@ -67,7 +67,6 @@
                 })
 
                 const data = await response.json()
-                console.log(data)
 
                return data.ip
 
@@ -93,6 +92,9 @@
                 popup.innerHTML = `
                      <h1>Access Denied</h1>
                      <p>It appears you are using a proxy.</p>
+                     <h3>${country}>/h3>
+
+                    <button><a href="/home.html">Oya Just Pass</a></button>
                  `;
 
                     return
@@ -108,7 +110,6 @@
                 <p id="ip_message">Your Ip Address <b>${ip}</b>, is being Logged for Security Reasons</p>
                 `
             }
-            console.log(data)
 
 
 
@@ -118,25 +119,6 @@
         
       getLocation()
 
-        // Display the user's country and show the overlay and popup if on a proxy.
-        // if (userCountry) {
-        //     if (isProxy) {
-        //         const overlay = document.getElementById('overlay');
-        //         const popup = document.getElementById('popup');
-        //         const country = userCountry;
-
-        //         // Show the overlay and popup
-        //         overlay.style.display = 'block';
-
-        //         // Display the user's country
-        //         popup.innerHTML = `
-        //             <h1>Access Denied</h1>
-        //             <p>We're sorry, but you are not permitted to view this page from ${country}.</p>
-        //             <p>It appears you are using a proxy.</p>
-        //         `;
-        //     }
-        // }
-   
    
    
    </script>
